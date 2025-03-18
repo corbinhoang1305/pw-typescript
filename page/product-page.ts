@@ -8,7 +8,7 @@ export class ProductPage extends MaterialBasePage {
 
     async goToProductPage(){
         await this.openMeterialPage();
-        await this.gotoPage("Product Page");
+        await this.gotoPage("Product page");
     }
 
     async addProductToCart(productName: string, quantity: number){
@@ -16,7 +16,7 @@ export class ProductPage extends MaterialBasePage {
     }
 
     async getInfoProductInCart(productName: string){
-        const price = await this.page.locator(`//td[contains(text(),'${productName}')]/following-sibling::td`).textContent();
+        const price = await this.page.locator(`//td[contains(text(),'${productName}')]/following-sibling::td[1]`).textContent();
         const quantity = await this.page.locator(`//td[contains(text(),'${productName}')]/following-sibling::td[2]`).textContent();
         const total = await this.page.locator(`//td[contains(text(),'${productName}')]/following-sibling::td[3]`).textContent();
         const infoProduct = {
