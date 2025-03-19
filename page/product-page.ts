@@ -19,10 +19,12 @@ export class ProductPage extends MaterialBasePage {
         const price = await this.page.locator(`//td[contains(text(),'${productName}')]/following-sibling::td[1]`).textContent();
         const quantity = await this.page.locator(`//td[contains(text(),'${productName}')]/following-sibling::td[2]`).textContent();
         const total = await this.page.locator(`//td[contains(text(),'${productName}')]/following-sibling::td[3]`).textContent();
+        const totalprice = await this.page.locator("//td[@class='total-price']").textContent();
         const infoProduct = {
             price,
             quantity,
-            total
+            total,
+            totalprice
         }
         return infoProduct;
     }

@@ -38,18 +38,31 @@ test ("Exercies 2: Product page", async ({page}) =>{
           for (let i = 0; i < arrayProducts.length; i++){
                const actualQuantityProduct = (await productPage.getInfoProductInCart(arrayProducts[i].name)).quantity;
                const expectQuantityProduct = arrayProducts[i].quatity.toString();
-               console.log("actualQuantityProduct: ", actualQuantityProduct);
-               console.log("expectQuantityProduct: ", expectQuantityProduct);
+               // console.log("actualQuantityProduct: ", actualQuantityProduct);
+               // console.log("expectQuantityProduct: ", expectQuantityProduct);
                expect(actualQuantityProduct).toEqual(expectQuantityProduct);
           }
      })
 
      await test.step("Verify total price of product in cart", async () =>{
-          const a = arrayProducts.length;
-          console.log(`number of array: ${a}`);
-          
-          // for (let i = 0; i < arrayProducts.length; i++){
+          // const a = arrayProducts.length;
+          // console.log(`number of array: ${a}`);
+          let TotalPrice = 0;
+          for (let i = 0; i < arrayProducts.length; i++){
+               const actualTotalProduct = (await productPage.getInfoProductInCart(arrayProducts[i].name)).total;
+               const total = arrayProducts[i].price * arrayProducts[i].quatity;;
+               const expectTotalProduct = "$" + total.toFixed(2);
+               // console.log(actualTotalPrice);
+               expect(actualTotalProduct).toEqual(expectTotalProduct);
 
+               TotalPrice += total;
+          }
+
+          const actualTotalPrice = (await productPage.getInfoProductInCart(arrayProducts[0].name)).totalprice;
+          const expectTotalPrice = "$" + TotalPrice.toFixed(2);
+          expect(actualTotalPrice).toEqual(expectTotalPrice);
+          // console.log(actualTotalPrice);
+          // console.log(expectTotalPrice);
      
      })
 
