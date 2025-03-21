@@ -1,4 +1,5 @@
-import {test} from '@playwright/test';
+import {expect , test} from '@playwright/test';
+import { PersonalNotesPage } from '../../../page/personal-notes-page';
 
 test ("Exercies 4: Personal notes", async ({page}) =>{
     const notes =[
@@ -61,3 +62,5 @@ test ("Exercies 4: Personal notes", async ({page}) =>{
     })
     await page.waitForTimeout(10000);
 })
+
+

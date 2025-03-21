@@ -1,10 +1,8 @@
-import {expect , test} from '@playwright/test';
-
+import {test , expect} from '@playwright/test';
 import { TodoPage } from '../../../page/todo-page';
 
-
 test ("Exercies 3: Product page", async ({page}) =>{ 
-    const todoPage = new TodoPage(page);
+    let todoPage = new TodoPage(page);
 
     await test.step("Go to Todo Page", async () =>{
         await todoPage.goToTodoPage();
@@ -30,6 +28,11 @@ test ("Exercies 3: Product page", async ({page}) =>{
     
     await test.step("Verify todo 90 is in viewport? ", async()=>{
         const xpathtodo90 = todoPage.getLocatorTask("Todo90");
-        await expect(xpathtodo90).toBeInViewPort();
+        await expect(xpathtodo90).toBeInViewport({timeout : 10000});
+    })
+
+    await test.step("Verify todo 21 is hidden? ", async()=>{
+        const xpathtodo21 = todoPage.getLocatorTask("Todo21");
+        await expect(xpathtodo21).not.toBeAttached();
     })
 })
