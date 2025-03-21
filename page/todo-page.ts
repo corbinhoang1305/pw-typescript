@@ -2,13 +2,19 @@ import { Page  } from "@playwright/test";
 import { MaterialBasePage } from "./material-page";
 
 export class TodoPage extends MaterialBasePage {
-    constructor (page : Page){
-        super(page);
-    }
+    
 
     xpathInputNewTask = "//input[@id='new-task']";
     xpathBtnAddTask = "//button[@id='add-task']";
     // xpathBtnDeleteTask = "//button[@id='todo1-delete']";
+
+    getLocatorTask(content: string){
+        return this.page.locator(`//span[text()='${content}']`);
+    }
+
+    constructor (page : Page){
+        super(page);
+    }
     
     async goToTodoPage(){
         await this.openMeterialPage();
@@ -24,10 +30,5 @@ export class TodoPage extends MaterialBasePage {
         const xpath = content.replace(" ","-").toLowerCase();
         await this.page.locator(`//button[@id='${xpath}-delete']`).click();
     }
-
-    async getLocatorTask(content: string){
-        return this.page.locator(`//span[contains(text(),'${content}')]`);
-    }
-
 
 }
