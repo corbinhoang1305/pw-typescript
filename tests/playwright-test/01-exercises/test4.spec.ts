@@ -44,23 +44,31 @@ test ("Exercies 4: Personal notes", async ({page}) =>{
             content: "This is note 10"
         }
     ]
+
+    let personalnotesPage = new PersonalNotesPage(page)
+
     await test.step("Navigate to Material Playwright Page", async () =>{
-        await page.goto("https://material.playwrightvn.com/");
-    })
-    await test.step("Click on Personal notes", async()=>{
-        await page.locator("//a[@href='04-xpath-personal-notes.html']").click();
+        await personalnotesPage.goToPersonalNotesPage();
+
     })
     await test.step("Them moi 10 note co noi dung la tieu de va 1 phan ngan (khoang 3 dong) tai bao https://vnexpress.net/khoa-hoc", async()=>{
         for (const note of notes){
-            await page.locator("//input[@id='note-title']").fill(note.title);
-            await page.locator("//textarea[@id='note-content']").fill(note.content);
-            await page.locator("//button[@id='add-note']").click();
+            await personalnotesPage.fillTitle(note.title);
+            await personalnotesPage.fillContent(note.content);
+            await personalnotesPage.clickAddNote();
         }
     })
+
     await test.step("Thuc hien search theo tieu de bai bao bat ki", async()=>{
-        await page.locator("//input[@id='search']").fill(notes[0].title);
+        await personalnotesPage.searchNotes("note 1")
     })
-    await page.waitForTimeout(10000);
+    
+    await test.step("Check that all retrieved articles contain the searched keyword", async() => {
+        const listTitles = await personalnotesPage.getAllTitleInNotes();
+        for (let i = 0; i < listTitles.length; i++){
+            expect(listTitles[i]).toContain("Note")
+        }
+    })
 })
 
 

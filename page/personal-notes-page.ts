@@ -14,7 +14,7 @@ export class PersonalNotesPage extends MaterialBasePage{
 
     async goToPersonalNotesPage(){
         await this.openMeterialPage();
-        await this.gotoPage("Personal Notes");
+        await this.gotoPage("Personal notes");
     }
 
     async fillTitle(title: string){
