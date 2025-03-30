@@ -23,7 +23,7 @@ test ("Exercies 1: Register Page", async ({page}) =>{
         await registerPage.selectInterest("technology");
         await registerPage.selectCountry(country);
         await registerPage.fillDateOfBirth(birthdate);
-        await registerPage.chooseFile("/test.png");
+        await registerPage.chooseFile("D:/test.png");
         await registerPage.fillBio(bio);
         await registerPage.checkNewsletter();
         await registerPage.clickBtnRegister();
@@ -44,7 +44,7 @@ test ("Exercies 1: Register Page", async ({page}) =>{
 
             //verify information
             expect(actualInformation).toContain("male");
-            expect(actualInformation).toContain("music");
+            expect(actualInformation).toContain("reading");
             // expect(actualInformation).toContain("technology");
             expect(actualInformation).toContain(country);
             expect(actualInformation).toContain(birthdate);
