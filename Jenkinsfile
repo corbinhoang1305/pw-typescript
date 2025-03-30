@@ -2,8 +2,7 @@ pipeline {
     agent any  // Chạy trên bất kỳ agent nào có sẵn
 
     environment {
-        NODEJS_HOME = tool 'C:\\nvm4w\\nodejs'  // Sử dụng Node.js đã cài trong Jenkins
-        PATH = "${NODEJS_HOME}/bin;${env.PATH}"  // Cập nhật đường dẫn Node.js vào PATH
+        nodejs 'NodeJS-Playwright'  // Sử dụng Node.js đã cài trong Jenkins
     }
 
     stages {
@@ -32,13 +31,15 @@ pipeline {
             }
         }
 
-        stage('Publish Allure Report') {  // Bước 5: Xuất báo cáo Allure trên Jenkins
+        stage('Publish Test Report') {
             steps {
-                allure([
-                    includeProperties: false,
-                    jdk: '',
-                    reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'allure-results']]
+                publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'playwright-report',
+                    reportFiles: 'index.html',
+                    reportName: 'Playwright Test Report'
                 ])
             }
         }
@@ -46,7 +47,8 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
+            archiveArtifacts artifacts: 'playwright-report/**', onlyIfSuccessful: true
+
         }
     }
 }
