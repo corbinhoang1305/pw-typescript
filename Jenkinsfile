@@ -1,6 +1,10 @@
 pipeline {
     agent any  // Chạy trên bất kỳ agent nào có sẵn
 
+    triggers {
+        githubPush()  // Lắng nghe sự kiện push từ GitHub
+    }
+
     tools {
         nodejs 'NodeJS-Playwright'  // Sử dụng Node.js đã cài trong Jenkins
     }
