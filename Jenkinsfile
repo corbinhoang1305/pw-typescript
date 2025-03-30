@@ -21,13 +21,7 @@ pipeline {
 
         stage('Run Playwright Tests') {  // Bước 3: Chạy test Playwright
             steps {
-                bat 'npx playwright test --reporter=allure'  // Chạy test với Allure report
-            }
-        }
-
-        stage('Generate Allure Report') {  // Bước 4: Tạo báo cáo Allure
-            steps {
-                bat 'npx allure generate allure-results --clean -o allure-report'
+                bat 'npx playwright test --reporter=html'  // Chạy test với Allure report
             }
         }
 
