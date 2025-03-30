@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repository') {  // Bước 1: Clone code từ GitHub/GitLab
             steps {
-                git 'https://github.com/corbinhoang1305/pw-typescript.git'  // Thay URL repo của bạn
+                git branch: 'main', url: 'https://github.com/corbinhoang1305/pw-typescript.git'  // Thay URL repo của bạn
             }
         }
 
