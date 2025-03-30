@@ -1,7 +1,7 @@
 pipeline {
     agent any  // Chạy trên bất kỳ agent nào có sẵn
 
-    environment {
+    tools {
         nodejs 'NodeJS-Playwright'  // Sử dụng Node.js đã cài trong Jenkins
     }
 
