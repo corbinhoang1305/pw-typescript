@@ -13,4 +13,6 @@ test('verify cart functionality after login', async ({ page }) => {
 //   // Add assertions to verify the cart functionality
 //   const cartItemCount = await page.textContent('.cart_quantity');
 //   test.expect(cartItemCount).toBe('1');
+
+// tesst
 });
