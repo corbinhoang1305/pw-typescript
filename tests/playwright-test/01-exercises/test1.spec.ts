@@ -53,7 +53,6 @@ test ("Exercies 1: Register Page", async ({page}) =>{
             console.log("Test passed");
         } catch (error) {
             console.log('verify failed:',error.message);
-            //test
         }
     })
 })
